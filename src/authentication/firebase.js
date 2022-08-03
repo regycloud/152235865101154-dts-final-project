@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,18 +16,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-async function register(email, password) {
+async function registerDenganEmailDanPassword(email, password) {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password)
         console.log(result.user)
     }
     catch(err) {
-        console.log(err.code);
+        if (err.code === `auth/email-already-in-use`) {
+            console.log('Email telah terdaftar')
+        }
         console.log(err.message);
     }
 }
 
+async function loginDenganEmailDanPassword(email, password) {
+    try {
+        const resultLogin = await signInWithEmailAndPassword(auth, email, password)
+        console.log(resultLogin.login)
+    }
+    catch(err) {
+        console.log(err.code)
+        console.log(err.message)
+    }
+}
+
+async function logout() {
+    try {
+        await signOut(auth);
+    }
+    catch(err) {
+        console.log(err)
+    }
+}
+
+
 export {
     auth, 
-    register
+    registerDenganEmailDanPassword,
+    loginDenganEmailDanPassword,
+    logout
 }
