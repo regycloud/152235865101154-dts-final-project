@@ -12,8 +12,8 @@ export const CardNews = (props) => {
                 </Typography>
                 <CardMedia
                 component="img"
-                image={`${props.news.urlToImage}`}
-                alt={`${props.articles}`}
+                image={`${props.news.thumb}`}
+                alt={`${props.news.title}`}
                 >
                 </CardMedia>
             </Box>
