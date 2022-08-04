@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage';
 import { Footer } from './components/Footer';
 import { DetailNews } from './pages/Detail';
 import { NotFound } from './pages/NotFound';
+import ProtectedComponent from './components/Protect';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Navigation />
       <Routes>
       <Route path='/' element={<HomePage />} />
-      <Route path='/Detail/:NewsID' element={<DetailNews />} />
+        <Route path='/Detail/:NewsID' element={ <ProtectedComponent><DetailNews /></ProtectedComponent>} />
       <Route path='register' element={<RegisterPage />} />
       <Route path='login' element={<LoginPage />} />
       <Route path='*' element={<NotFound />} />

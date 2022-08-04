@@ -20,6 +20,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
+  
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -65,6 +66,7 @@ const pages = [''];
 
 
 export const Navigation = () => {
+  const [inputSearch, setSearch] = React.useState('');
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -94,6 +96,19 @@ export const Navigation = () => {
      navigate('/login');
   }
 
+  const handleInput = async (e) => {
+    const inputUser = e.target.value.toLowerCase();
+    setSearch(inputUser);
+  }
+
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      navigate('/Detail/')
+    }
+  }
+
+  console.log(inputSearch);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -114,7 +129,7 @@ export const Navigation = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            My News
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -224,6 +239,8 @@ export const Navigation = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={handleInput}
+              onKeyDown={handleKeyDown}
             />
           </Search>
         </Toolbar>
@@ -231,60 +248,3 @@ export const Navigation = () => {
     </AppBar>
   );
 };
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { NavLink } from "react-router-dom";
-// import { auth, logout } from "../authentication/firebase";
-
-// export const Navigation = () => {
-//     const [newsType, setNewsType] = useState([]);
-//     const [user, isLoading] = useAuthState(auth);
-//     console.log(user ? 'yes': 'no')
-
-//     const onClickLogoutHandler = async () => {
-//         await logout();
-//     }
-
-//     return(
-//         <nav>
-//             <div className="nav-logo">
-//                 Put Logo Here
-//             </div>
-//                 <ul className="nav-links">
-//                     <li key="all">
-//                     {/* This link should have an activeClassName and exact prop */}
-//                     <NavLink
-//                         to="/"
-//                         className={({isActive}) => (isActive ? "nav-link-active" : 'nav-link')}
-//                         exact='/'
-//                         >
-//                         All News
-//                     </NavLink>
-//                     </li>
-
-//                     <li>
-//                     {user ? '' : 
-//                     <NavLink
-//                         to="/login"
-//                         >
-//                         Login
-//                     </NavLink>}
-//                     </li>
-                    
-//                     <li>
-//                         { user ? 
-//                         <NavLink onClick={onClickLogoutHandler} to="/">
-//                             Logout
-//                         </NavLink>
-//                         :
-//                         ''
-//                         }
-//                     </li>
-//             </ul>
-//         </nav>
-//     )
-// }

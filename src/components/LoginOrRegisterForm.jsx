@@ -69,6 +69,7 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
 
 
                 <Box sx={{borderColor: 'blue', borderStyle: 'solid', display: 'grid', justifyContent: 'center', padding: '50px'}}>
+            <Typography>{loginOrRegister === "login" ? "Login to see article details" : "Register for free"}</Typography>
                     <TextField
                         inputProps={{ style: {border: 'white', minWidth: '400px'}}}
                         label="Email"
