@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Navigation } from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { HomePage } from './pages/HomePage';
-import { Footer } from './components/Footer';
-import { DetailNews } from './pages/Detail';
-import { NotFound } from './pages/NotFound';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
